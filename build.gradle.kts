@@ -15,10 +15,6 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 repositories {
 	mavenCentral()
 }
-//
-//configurations {
-//	developmentOnly.extendsFrom(runtimeClasspath)
-//}
 
 val embeddedMongoVersion by properties
 val snippetsDir = file(property("snippetsDirPath")!!)
