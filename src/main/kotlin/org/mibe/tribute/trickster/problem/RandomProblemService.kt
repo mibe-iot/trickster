@@ -6,10 +6,10 @@ import kotlin.random.Random
 
 @Service
 class RandomProblemService(
-    private val problems: MutableMap<String, Problem> = HashMap<String, Problem>()
+    private val problems: MutableMap<String, Problem> = HashMap()
 ) : ProblemService {
 
-    private val operators = listOf<String>("*", "+", "-")
+    private val operators = listOf("*", "+", "-")
 
     override fun getProblem(): Problem {
         val problem = buildProblem()
@@ -22,8 +22,8 @@ class RandomProblemService(
     }
 
     private fun buildProblem() : Problem {
-        val firstArgument: Int = Random.nextInt();
-        val secondArgument: Int = Random.nextInt();
+        val firstArgument: Int = Random.nextInt()
+        val secondArgument: Int = Random.nextInt()
         val operator = operators.random()
         val solution = evaluate(firstArgument, operator, secondArgument)
         val definition = "$firstArgument $operator $secondArgument"

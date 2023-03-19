@@ -49,7 +49,7 @@ tasks.withType<KotlinCompile> {
 idea {
 	module {
 		sourceDirs.minusAssign(file("src/integrationTest/kotlin"))
-		testSources.from(file("src/integrationTest/kotlin"),)
+		testSources.from(file("src/integrationTest/kotlin"))
 	}
 }
 
