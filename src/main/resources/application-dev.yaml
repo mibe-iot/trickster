@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./build/data/db
+    driverClassName: org.h2.Driver
+  jpa:
+    databasePlatform: org.hibernate.dialect.H2Dialect

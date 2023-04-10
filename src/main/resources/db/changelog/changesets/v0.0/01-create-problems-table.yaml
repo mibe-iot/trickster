@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: "01-create-problems-table"
+      author: "Ilya Buhlakou"
+      changes:
+        - createTable:
+            tableName: "problems"
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey:  true
+                    unique: true
+                    nullable:  false
+              - column:
+                  name: definition
+                  type: varchar(128)
+                  constraints:
+                    unique: false
+                    nullable: false

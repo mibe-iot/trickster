@@ -16,4 +16,8 @@ class InMemoryProblemService(val topics: List<Topic>) : ProblemService {
         problems.add(problem)
         return ProblemTask(problem)
     }
+
+    override fun randomProblem(): ProblemTask {
+        TODO("Not yet implemented")
+    }
 }

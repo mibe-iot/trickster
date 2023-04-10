@@ -18,15 +18,18 @@ repositories {
 	mavenCentral()
 }
 
-val asciidoctorExt by configurations.creating
+val asciidoctorExt: Configuration by configurations.creating
 
 val kotestVersion by properties
 val snippetsDir = file(property("snippetsDirPath")!!)
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.liquibase:liquibase-core")
+	developmentOnly("com.h2database:h2:2.1.214")
 
 	asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor:3.0.0")
 	testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
