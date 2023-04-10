@@ -1,0 +1,7 @@
+= API documentation
+
+=== GET random problem `/problems/any`
+operation::problems-api/get-any[]
+
+=== Something
+operation::problems-api/smth[]

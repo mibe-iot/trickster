@@ -4,7 +4,7 @@ plugins {
 	id("org.springframework.boot") version "3.0.4"
 	id("io.spring.dependency-management") version "1.1.0"
 	id("org.asciidoctor.jvm.convert") version "3.3.2"
-	id("trickster.integration-tests")
+	id("com.coditory.integration-test") version "1.4.5"
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
 	idea
@@ -18,6 +18,8 @@ repositories {
 	mavenCentral()
 }
 
+val asciidoctorExt by configurations.creating
+
 val kotestVersion by properties
 val snippetsDir = file(property("snippetsDirPath")!!)
 
@@ -26,6 +28,7 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+	asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor:3.0.0")
 	testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 	testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
 	testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
@@ -46,22 +49,22 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-idea {
-	module {
-		sourceDirs.minusAssign(file("src/integrationTest/kotlin"))
-		testSources.from(file("src/integrationTest/kotlin"))
-	}
-}
-
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-tasks.integrationTest {
+tasks.integrationTest  {
 	outputs.dir(snippetsDir)
 }
 
 tasks.asciidoctor {
 	inputs.dir(snippetsDir)
-	dependsOn(tasks.test)
+	configurations("asciidoctorExt")
+	dependsOn(tasks.test, tasks.integrationTest )
+}
+
+idea {
+	module {
+		testSources.from(sourceSets["integration"].kotlin.srcDirs)
+	}
 }
